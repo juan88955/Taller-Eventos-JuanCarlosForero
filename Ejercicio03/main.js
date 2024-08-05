@@ -1,12 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
     const app = document.getElementById('app');
+
     let notas = [
         { id: 1, titulo: 'Salir a trabajar', texto: 'Para obtener un poco de dinero', realizada: false },
         { id: 2, titulo: 'Comer', texto: 'Un buen almuerzo del dia', realizada: true },
         { id: 3, titulo: 'Estudiar eventos', texto: 'Para aprender muy bien JS', realizada: false },
         { id: 4, titulo: 'Tomar agua', texto: 'Debo hidratarme bien ¡No olvidar!', realizada: true }
     ];
-    let idGlobal = 4, mostrarSoloRealizadas = false, terminoBusqueda = '';
+
+    let idGlobal = 4;
+    let mostrarSoloRealizadas = false;
+    let terminoBusqueda = '';
 
     app.innerHTML = `
         <h1 class="text-center text-dark mb-4">Lista De Notas</h1>
@@ -63,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     btnGuardar.addEventListener('click', () => {
-        const titulo = inputTitulo.value.trim(), texto = textareaNota.value.trim();
+        const titulo = inputTitulo.value.trim();
+        const texto = textareaNota.value.trim();
         if (titulo && texto) {
             notas.unshift({ id: ++idGlobal, titulo, texto, realizada: false });
             pintarNotas();
@@ -73,12 +78,29 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    btnLimpiar.addEventListener('click', () => inputTitulo.value = textareaNota.value = '');
-    toggleRealizadas.addEventListener('change', () => { mostrarSoloRealizadas = toggleRealizadas.checked; pintarNotas(); });
-    buscarInput.addEventListener('input', () => { terminoBusqueda = buscarInput.value; pintarNotas(); });
+    btnLimpiar.addEventListener('click', () => {
+        inputTitulo.value = textareaNota.value = '';
+    });
 
-    window.borrarNota = id => { notas = notas.filter(nota => nota.id !== id); pintarNotas(); };
-    window.marcarNota = (id, realizada) => { notas.find(nota => nota.id === id).realizada = realizada; pintarNotas(); };
+    toggleRealizadas.addEventListener('change', () => {
+        mostrarSoloRealizadas = toggleRealizadas.checked;
+        pintarNotas();
+    });
+
+    buscarInput.addEventListener('input', () => {
+        terminoBusqueda = buscarInput.value;
+        pintarNotas();
+    });
+
+    window.borrarNota = id => {
+        notas = notas.filter(nota => nota.id !== id);
+        pintarNotas();
+    };
+
+    window.marcarNota = (id, realizada) => {
+        notas.find(nota => nota.id === id).realizada = realizada;
+        pintarNotas();
+    };
 
     pintarNotas();
 });

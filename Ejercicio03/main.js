@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const app = document.getElementById('app');
     let notas = [
-        { id: 1, titulo: 'Salir a trabajar', texto: 'Obtener un poco de dinero', realizada: false },
+        { id: 1, titulo: 'Salir a trabajar', texto: 'Para obtener un poco de dinero', realizada: false },
         { id: 2, titulo: 'Comer', texto: 'Un buen almuerzo del dia', realizada: true },
         { id: 3, titulo: 'Estudiar eventos', texto: 'Para aprender muy bien JS', realizada: false },
         { id: 4, titulo: 'Tomar agua', texto: 'Debo hidratarme bien ¡No olvidar!', realizada: true }
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div>
             `).join('') :
-            '<p class="text-white">NO HAY NOTAS PARA MOSTRAR</p>';
+            '<p class="text-dark">NO HAY NOTAS PARA MOSTRAR</p>';
 
         contenedorNotas.querySelectorAll('input[type="checkbox"]').forEach(checkbox =>
             checkbox.addEventListener('change', e => marcarNota(parseInt(checkbox.id.split('-')[1]), e.target.checked))
